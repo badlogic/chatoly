@@ -1,0 +1,26 @@
+{
+  "name": "@mariozechner/chatoly",
+  "version": "1.0.0",
+  "description": "YouTube chat overlay for macOS",
+  "bin": {
+    "chatoly": "./bin/chatoly"
+  },
+  "files": [
+    "bin/chatoly"
+  ],
+  "keywords": ["youtube", "chat", "overlay", "macos", "streaming"],
+  "author": "Mario Zechner",
+  "license": "MIT",
+  "os": ["darwin"],
+  "cpu": ["x64", "arm64"],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/badlogic/chatoly.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

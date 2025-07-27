@@ -1,0 +1,19 @@
+# Build artifacts
+.build/
+*.app
+*.zip
+*.entitlements
+
+# Distribution files
+dist/
+bin/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# npm
+node_modules/
+npm-debug.log*
