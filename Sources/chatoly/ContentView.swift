@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var youtubeURL: String = "https://www.youtube.com/watch?v=0YsGtKKWEn4"
+    @State private var youtubeURL: String = ""
     @State private var showWebView: Bool = false
     @State private var chatURL: String = ""
     @FocusState private var isTextFieldFocused: Bool
