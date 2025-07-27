@@ -41,6 +41,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 window.isMovableByWindowBackground = true
                 window.hasShadow = true
                 
+                // Make window appear on all spaces
+                window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
+                
                 // Activate window
                 window.makeKeyAndOrderFront(nil)
                 NSApp.activate(ignoringOtherApps: true)
