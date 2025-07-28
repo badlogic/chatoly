@@ -41,6 +41,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 window.isMovableByWindowBackground = true
                 window.hasShadow = true
                 
+                // Make window slightly transparent
+                window.alphaValue = 0.95
+                
                 // Make window appear on all spaces
                 window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
                 

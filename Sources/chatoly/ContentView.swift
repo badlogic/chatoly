@@ -4,6 +4,7 @@ struct ContentView: View {
     @State private var youtubeURL: String = ""
     @State private var showWebView: Bool = false
     @State private var chatURL: String = ""
+    @State private var errorMessage: String = ""
     @FocusState private var isTextFieldFocused: Bool
 
     var body: some View {
@@ -23,9 +24,11 @@ struct ContentView: View {
                     Text("YouTube Chat Overlay")
                         .font(.title)
                         .fontWeight(.bold)
+                        .foregroundColor(.white)
 
                     Text("Enter YouTube video or live stream URL:")
                         .font(.headline)
+                        .foregroundColor(.white)
 
                     TextField("https://www.youtube.com/watch?v=...", text: $youtubeURL)
                         .textFieldStyle(.roundedBorder)
@@ -37,9 +40,17 @@ struct ContentView: View {
                     }
                     .disabled(youtubeURL.isEmpty)
                     .keyboardShortcut(.defaultAction)
+                    
+                    if !errorMessage.isEmpty {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .font(.caption)
+                    }
                 }
                 .padding()
                 .frame(minWidth: 250, minHeight: 150)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.black)
             }
         }
         .onAppear {
@@ -51,11 +62,17 @@ struct ContentView: View {
     }
 
     private func loadChat() {
+        errorMessage = ""
+        print("Loading chat for URL: \(youtubeURL)")
+        
         guard let videoID = extractVideoID(from: youtubeURL) else {
+            errorMessage = "Invalid YouTube URL. Please enter a valid YouTube video or live stream URL."
+            print("Failed to extract video ID from: \(youtubeURL)")
             return
         }
 
         chatURL = "https://www.youtube.com/live_chat?v=\(videoID)"
+        print("Loading chat URL: \(chatURL)")
         showWebView = true
     }
 
