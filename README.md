@@ -1,6 +1,6 @@
 # Chatoly
 
-A simple macOS YouTube chat overlay application that displays YouTube live stream chat in an always-on-top window.
+A simple macOS YouTube chat overlay application that displays YouTube live stream chat in an always-on-top window. Perfect for live-streams where you want to actually see on screen when chat presses F.
 
 https://github.com/user-attachments/assets/ecc489bd-8649-4321-aa45-ccf3c0eb5415
 
