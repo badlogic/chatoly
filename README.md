@@ -2,7 +2,8 @@
 
 A simple macOS YouTube chat overlay application that displays YouTube live stream chat in an always-on-top window.
 
-[![Chatoly Demo](docs/chat.png)](https://mariozechner.at/uploads/chatoly-demo.mp4)
+[![Chatoly Demo - Click to watch video](docs/chat.png)](https://mariozechner.at/uploads/chatoly-demo.mp4)
+*Click the image above to watch the demo video*
 
 *<sub>Watch this thing get built from scratch in [2 hours](https://www.youtube.com/watch?v=0YsGtKKWEn4)</sub>*
 
