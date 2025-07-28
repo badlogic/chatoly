@@ -1,6 +1,6 @@
 {
   "name": "@mariozechner/chatoly",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "YouTube chat overlay for macOS",
   "bin": {
     "chatoly": "./bin/chatoly"
@@ -8,11 +8,22 @@
   "files": [
     "bin/chatoly"
   ],
-  "keywords": ["youtube", "chat", "overlay", "macos", "streaming"],
+  "keywords": [
+    "youtube",
+    "chat",
+    "overlay",
+    "macos",
+    "streaming"
+  ],
   "author": "Mario Zechner",
   "license": "MIT",
-  "os": ["darwin"],
-  "cpu": ["x64", "arm64"],
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ],
   "engines": {
     "node": ">=14.0.0"
   },
