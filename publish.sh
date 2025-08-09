@@ -82,6 +82,7 @@ npm version patch --no-git-tag-version
 NEW_VERSION=$(node -p "require('./package.json').version")
 git add package.json
 git commit -m "Bump version to $NEW_VERSION"
+git push
 
 log_info "✅ Published v$VERSION successfully!"
 log_info "✅ Bumped to v$NEW_VERSION for next release"
