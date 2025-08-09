@@ -1,6 +1,6 @@
 {
   "name": "@mariozechner/chatoly",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "YouTube chat overlay for macOS",
   "bin": {
     "chatoly": "./bin/chatoly"
