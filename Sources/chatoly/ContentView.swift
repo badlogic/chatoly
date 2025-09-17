@@ -2,23 +2,16 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var youtubeURL: String = ""
-    @State private var showWebView: Bool = false
-    @State private var chatURL: String = ""
+    @State private var showChatView: Bool = false
+    @State private var videoID: String = ""
     @State private var errorMessage: String = ""
     @FocusState private var isTextFieldFocused: Bool
 
     var body: some View {
         Group {
-            if showWebView {
-                ZStack(alignment: .top) {
-                    WebView(url: chatURL)
-                        .frame(minWidth: 200, minHeight: 150)
-
-                    // Draggable area at the top
-                    DragHandle()
-                        .frame(height: 15)
-                        .frame(maxWidth: .infinity)
-                }
+            if showChatView {
+                ChatView(videoId: videoID)
+                    .frame(minWidth: 300, minHeight: 200)
             } else {
                 VStack(spacing: 20) {
                     Text("YouTube Chat Overlay")
@@ -40,7 +33,7 @@ struct ContentView: View {
                     }
                     .disabled(youtubeURL.isEmpty)
                     .keyboardShortcut(.defaultAction)
-                    
+
                     if !errorMessage.isEmpty {
                         Text(errorMessage)
                             .foregroundColor(.red)
@@ -64,16 +57,16 @@ struct ContentView: View {
     private func loadChat() {
         errorMessage = ""
         print("Loading chat for URL: \(youtubeURL)")
-        
-        guard let videoID = extractVideoID(from: youtubeURL) else {
+
+        guard let extractedVideoID = extractVideoID(from: youtubeURL) else {
             errorMessage = "Invalid YouTube URL. Please enter a valid YouTube video or live stream URL."
             print("Failed to extract video ID from: \(youtubeURL)")
             return
         }
 
-        chatURL = "https://www.youtube.com/live_chat?v=\(videoID)"
-        print("Loading chat URL: \(chatURL)")
-        showWebView = true
+        videoID = extractedVideoID
+        print("Extracted video ID: \(videoID)")
+        showChatView = true
     }
 
     private func extractVideoID(from url: String) -> String? {

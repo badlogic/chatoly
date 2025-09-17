@@ -1,6 +1,6 @@
 # Chatoly
 
-A simple macOS YouTube chat overlay application that displays YouTube live stream chat in an always-on-top window. Perfect for live-streams where you want to actually see on screen when chat presses F.
+A native macOS YouTube chat overlay application that displays YouTube live stream chat in a beautiful, always-on-top window. Features a clean SwiftUI interface with real-time message streaming directly from YouTube's API. Perfect for live-streamers who want to monitor chat without switching windows.
 
 https://github.com/user-attachments/assets/ecc489bd-8649-4321-aa45-ccf3c0eb5415
 
@@ -15,9 +15,15 @@ chatoly
 
 ## Features
 
+- **Native SwiftUI Interface** - Beautiful, clean chat display with smooth animations
+- **Real-time Streaming** - Direct connection to YouTube's chat API for instant message updates
+- **Smart Message Display** - Avatar thumbnails, author names, badges, and special message types (memberships, super chats)
+- **Auto-scroll** - Automatically scrolls to new messages with smooth animations
+- **Frosted Glass Background** - Elegant translucent design that integrates with macOS
 - **Always on top** - Chat window stays above all other applications
 - **Movable & Resizable** - Position and size the chat window exactly where you need it
-- **YouTube live stream chat** - Works with any YouTube live stream or video with chat
+- **Performance Optimized** - Limits message history and efficiently handles high-volume chats
+- **Connection Status** - Visual indicators showing connection state and message count
 
 ## Development
 
