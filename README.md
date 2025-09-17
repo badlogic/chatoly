@@ -21,18 +21,47 @@ chatoly
 
 ## Development
 
+### Building
+
 ```bash
-# Clean build artifacts
+# Build debug mode (default)
+./build.sh
+
+# Build release mode
+./build.sh release
+
+# Clean and build
 ./build.sh clean
 
-# Build and run
+# Build and run the main app
 ./build.sh run
 
 # Build release and run
 ./build.sh release run
 
-# Build for distribution (signs and notarizes)
+# Build for distribution (signs and notarizes both executables)
 ./build.sh notarize
+```
+
+### Executables
+
+The project builds two executables:
+
+1. **`chatoly`** - The main GUI application with the overlay window
+2. **`chatoly-stream`** - A CLI tool for streaming YouTube chat to console (useful for debugging/testing)
+
+After building, executables are located in:
+- Debug: `./.build/debug/chatoly` and `./.build/debug/chatoly-stream`
+- Release: `./.build/release/chatoly` and `./.build/release/chatoly-stream`
+
+```bash
+# Run the stream CLI tool after building
+./build.sh
+./.build/debug/chatoly-stream
+
+# Or use Swift directly
+swift build
+swift run chatoly-stream
 ```
 
 For notarization to work, you need an Apple Developer account with a valid Developer ID certificate. Set the `NOTARY_TOOL_PASSWORD` environment variable with an app-specific password generated from your Apple ID account. The build script expects your certificate to be named "Developer ID Application" in your keychain. You'll also need your Team ID from your Apple Developer account. Without these, use the regular build commands which produce unsigned binaries that work locally but may trigger Gatekeeper warnings when shared.

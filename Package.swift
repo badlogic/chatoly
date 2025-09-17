@@ -11,10 +11,20 @@ let package = Package(
             name: "chatoly",
             targets: ["chatoly"]
         ),
+        .executable(
+            name: "chatoly-stream",
+            targets: ["chatoly-stream"]
+        ),
     ],
     targets: [
         .executableTarget(
             name: "chatoly",
+            swiftSettings: [
+                .swiftLanguageMode(.v6)
+            ]
+        ),
+        .executableTarget(
+            name: "chatoly-stream",
             swiftSettings: [
                 .swiftLanguageMode(.v6)
             ]

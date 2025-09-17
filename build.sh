@@ -21,14 +21,18 @@ function build_debug() {
     echo "🔨 Building in debug mode..."
     swift build --configuration debug
     echo "✅ Debug build completed"
-    echo "📍 Executable: $BUILD_DIR/debug/$PROJECT_NAME"
+    echo "📍 Executables:"
+    echo "   - $BUILD_DIR/debug/$PROJECT_NAME"
+    echo "   - $BUILD_DIR/debug/chatoly-stream"
 }
 
 function build_release() {
     echo "🚀 Building in release mode..."
     swift build --configuration release
     echo "✅ Release build completed"
-    echo "📍 Executable: $BUILD_DIR/release/$PROJECT_NAME"
+    echo "📍 Executables:"
+    echo "   - $BUILD_DIR/release/$PROJECT_NAME"
+    echo "   - $BUILD_DIR/release/chatoly-stream"
 }
 
 function run_executable() {
@@ -51,37 +55,47 @@ function run_executable() {
 
 function notarize_build() {
     echo "🔏 Starting notarization build..."
-    
+
     # Check prerequisites
     if [ -z "$NOTARY_TOOL_PASSWORD" ]; then
         echo "❌ NOTARY_TOOL_PASSWORD not set"
         echo "💡 Add 'export NOTARY_TOOL_PASSWORD=\"your-app-specific-password\"' to ~/.zshrc"
         exit 1
     fi
-    
+
     # Clean and build release
     clean
     build_release
-    
+
     # Create bin directory
     mkdir -p bin
-    
-    # Sign executable
-    echo "📝 Signing executable..."
+
+    # Sign both executables
+    echo "📝 Signing executables..."
     codesign --force --sign "$DISTRIBUTION_CERT" \
         --options runtime \
         --timestamp \
         "$BUILD_DIR/release/$PROJECT_NAME"
-    
+
     if [ $? -ne 0 ]; then
-        echo "❌ Code signing failed"
+        echo "❌ Code signing failed for $PROJECT_NAME"
         exit 1
     fi
-    
-    # Create zip for notarization
+
+    codesign --force --sign "$DISTRIBUTION_CERT" \
+        --options runtime \
+        --timestamp \
+        "$BUILD_DIR/release/chatoly-stream"
+
+    if [ $? -ne 0 ]; then
+        echo "❌ Code signing failed for chatoly-stream"
+        exit 1
+    fi
+
+    # Create zip for notarization (include both executables)
     echo "📦 Creating zip for notarization..."
-    zip -j chatoly.zip "$BUILD_DIR/release/$PROJECT_NAME"
-    
+    zip -j chatoly.zip "$BUILD_DIR/release/$PROJECT_NAME" "$BUILD_DIR/release/chatoly-stream"
+
     # Submit for notarization
     echo "☁️  Submitting for notarization (this may take a few minutes)..."
     xcrun notarytool submit chatoly.zip \
@@ -89,21 +103,24 @@ function notarize_build() {
         --team-id "$TEAM_ID" \
         --password "$NOTARY_TOOL_PASSWORD" \
         --wait
-    
+
     if [ $? -ne 0 ]; then
         echo "❌ Notarization failed"
         rm chatoly.zip
         exit 1
     fi
-    
-    # Extract notarized binary to bin/
-    echo "📤 Extracting notarized binary..."
+
+    # Extract notarized binaries to bin/
+    echo "📤 Extracting notarized binaries..."
     unzip -o chatoly.zip -d bin/
     rm chatoly.zip
     chmod +x "bin/$PROJECT_NAME"
-    
+    chmod +x "bin/chatoly-stream"
+
     echo "✅ Notarization completed!"
-    echo "📍 Notarized executable: bin/$PROJECT_NAME"
+    echo "📍 Notarized executables:"
+    echo "   - bin/$PROJECT_NAME"
+    echo "   - bin/chatoly-stream"
 }
 
 function show_help() {
